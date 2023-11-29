@@ -95,21 +95,21 @@ export default {
           },
           {
             path:'/index',
-            label:'菜单管理',
+            label:'用户管理',
             icon:'Grid',
             url:'',
             color:'hotpink'
           },
           {
             path:'/index',
-            label:'商品管理',
+            label:'表单生成',
             icon:'Goods',
             url:'',
             color:'khaki'
           },
           {
             path:'/index',
-            label:'订单管理',
+            label:'媒体库',
             icon:'ShoppingTrolley',
             url:'',
             color:'peachpuff'

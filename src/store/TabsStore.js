@@ -17,7 +17,7 @@ const useTabsStore = defineStore('tabStore', {
     addTabs (path,name){
       this.$state.editableTabsValue = path
       this.routerList.push({ path:path,name:name,title:name })
-    }
+    },
   },
   persist: {
     enabled: true

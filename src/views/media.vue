@@ -2,7 +2,7 @@
     <div>
         <el-alert
         style="margin-bottom: 10px;"
-        title="点击“文件名/备注”可以编辑文件名或者备注内容。"
+        title="点击“图片”可以放大进行浏览。"
         type="warning"
         show-icon
         />
@@ -27,9 +27,6 @@
                 <el-button type="primary">点击上传</el-button>
             </el-tooltip>
         </el-upload>
-        
-
-
         </div>
         <div class="uploadmid">
             <el-input v-model="inputValue" placeholder="请输入文件名或备注" />
@@ -38,7 +35,6 @@
             <el-button type="primary" :icon="Search" @click="serchPhoto">搜索</el-button>
         </div>
     </div>
-
     <!-- 图片展示 -->
     <div>
         <el-table :data="tableData" style="width: 100%">
@@ -49,6 +45,11 @@
                         lazy 
                         fit="contain"
                         style="width: 100px; height: 100px;"
+                        :preview-src-list="srcList"
+                        :zoom-rate="1.2"
+                        :max-scale="7"
+                        :min-scale="0.2"
+                        preview-teleported	
                         />
                     </div>
                 </template>
@@ -129,9 +130,11 @@ export default{
         }
          //图片获取
          let tableData = ref([])
+         let srcList  = ref([])
         onMounted(()=>{
             getPhoto().then((res)=>{
                 res.data.forEach((item,index)=>{
+                    srcList.value.push(item.base64_data)
                     tableData.value.push({
                         id:res.data[index].id,
                         photo:res.data[index].base64_data,
@@ -212,7 +215,8 @@ export default{
             beforeUpload,
             onChange,
             confirmEvent,
-            downLoad
+            downLoad,
+            srcList
         }
     }
 }

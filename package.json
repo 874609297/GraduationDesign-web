@@ -13,6 +13,7 @@
     "axios": "^1.5.1",
     "echarts": "^5.4.3",
     "element-plus": "^2.4.1",
+    "file-saver": "^2.0.5",
     "moment": "^2.29.4",
     "pinia": "^2.1.7",
     "pinia-plugin-persist": "^1.0.0",
@@ -20,7 +21,9 @@
     "scss": "^0.2.4",
     "vform3-builds": "^3.0.10",
     "vue": "^3.3.4",
-    "vue-router": "^4.2.5"
+    "vue-router": "^4.2.5",
+    "xlsx": "^0.18.5",
+    "xlsx-style": "^0.8.13"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.4.0",

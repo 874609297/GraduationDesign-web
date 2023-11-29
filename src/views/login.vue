@@ -17,11 +17,11 @@
                 status-icon
             >
             <el-form-item  prop="username">
-                <el-input v-model="ruleForm.username" placeholder="请输入用户名" style="height:50px"/>
+                <el-input v-model="ruleForm.username"  placeholder="请输入用户名" style="height:50px"/>
             </el-form-item>
             
             <el-form-item  prop="password">
-                <el-input v-model="ruleForm.password" placeholder="请输入密码" type="password" style="height:50px"/>
+                <el-input v-model="ruleForm.password"  placeholder="请输入密码" type="password" style="height:50px"/>
             </el-form-item>
             </el-form>
             <div class="btnBox" style="text-align: center;">
@@ -36,7 +36,7 @@
     </div>
 </template>
 <script>
-import {reactive} from 'vue'
+import {onMounted, reactive, ref} from 'vue'
 import { login } from '../api/home'
 import { useRouter } from 'vue-router'
 export default {
@@ -46,28 +46,26 @@ export default {
             username: '',
             password: '',
         })
-
         const rules = reactive({
             username: [
             { required: true, message: '请输入用户名', trigger: 'blur' },
             { min: 5, max: 8, message: '请输入正确用户名', trigger: 'blur' },
             ],
             password:[
-                {},
+                { required: true, message: '请输入密码', trigger: 'blur' },
                 { min: 6, max: 11, message: '请至少输入6位密码', trigger: 'blur' }
             ]
         })
         const LoginBtn = ()=>{
             login(ruleForm).then((res)=>{
                 localStorage.setItem('token',res.token)
-                console.log(res);
                 router.push('/main')
             })
         }
         return {
             rules,
             ruleForm,
-            LoginBtn
+            LoginBtn,
         }
     }
 }
@@ -82,9 +80,9 @@ export default {
 }
 .login-box{
     padding: 20px;
-    width: 300px;
     margin-left: 280px;
 }
+.pic-box{}
 .title-box{
     margin-bottom: 20px;
     font-weight: 700!important;
@@ -93,6 +91,7 @@ export default {
 }
 .pic-box img{
     height: 100vh;
+    width: 100%;
 }
 .info{
     font-weight: 300!important;

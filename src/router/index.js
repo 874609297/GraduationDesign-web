@@ -7,45 +7,57 @@ const routes = [
     },
     {
         path: '/main',
-        name: 'main',
-        meta:{"icon":"Houese"},
+        name: '仪表盘',
+        meta:{icon:"Houese"},
         component: ()=>import('../layout/main.vue'),
         children:[
             {
                 path:'/main',
                 name:'仪表盘',
-                component: ()=>import('../views/home.vue')
+                component: ()=>import('../views/home.vue'),
+                meta:{icon:"ChromeFilled"}
             },
             {   
                 name:'管理员',
                 path:'/admin',
+                meta:{icon:"User"},
                 children:[
                     {
-                        meta:{icon:"House"},
+                        meta:{icon:"Avatar"},
                         path:'/authority',
                         name:'角色管理',
                         component:()=>import('../views/authority.vue')
                     },
                     {
+                        meta:{icon:"Share"},
                         path:'/user',
                         name:'用户管理',
-                        component:()=>import('../views/user.vue')
+                        component:()=>import('../views/user.vue'),
                     }
                 ]
             },
             {
                 path:'/systemtools',
                 name:'系统工具',
+                meta:{icon:"Setting"},
                 children:[
                     {
                         path:'/formCreate',
                         name:'表单生成',
-                        component:()=>import('../views/formCreate.vue')
+                        component:()=>import('../views/formCreate.vue'),
+                        meta:{icon:"MagicStick"}
                     },
                     {
                         path:'/media',
                         name:'媒体库',
-                        component:()=>import('../views/media.vue')
+                        component:()=>import('../views/media.vue'),
+                        meta:{icon:"Download"}
+                    },
+                    {
+                        path:'/excel',
+                        name:'excel导出',
+                        component:()=>import('../views/excel.vue'),
+                        meta:{icon:"Upload"}
                     }
                 ]
             }

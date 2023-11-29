@@ -1,5 +1,8 @@
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
+import { ElLoading } from 'element-plus'
+
+let loadingInstance;
 
 const request = axios.create({
     // baseURL:process.env.VUE_APP_API_URL,
@@ -12,6 +15,12 @@ const request = axios.create({
 request.interceptors.request.use(
     config => {
           // 封装token鉴权
+          loadingInstance  = ElLoading.service({ //加载loading
+            fullscreen: true, 
+            text: 'Loading',
+            spinner: 'el-icon-loading',
+            background: 'rgba(0, 0, 0, 0.7)' 
+      });
         const token = localStorage.getItem('token')
         if (token) {
             config.headers['Authorization'] = token
@@ -26,6 +35,7 @@ request.interceptors.request.use(
  */
 request.interceptors.response.use(
     res => {
+        loadingInstance.close();
         // 过滤数据
         return res.data
     },

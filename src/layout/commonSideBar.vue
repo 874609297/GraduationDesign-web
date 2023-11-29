@@ -18,16 +18,29 @@
         <template v-for="(item,index) in routerOptions" :key="index">
           <template v-if="!item.children">
               <el-menu-item :index="item.path" @click="routerGoto(item)">
-                <span>{{ item.name }}</span>
+                <template #title>
+                <el-icon>
+                  <component :is="item.meta.icon"></component>
+                </el-icon>
+                <span>{{ item.name}}</span>
+              </template>
               </el-menu-item>
           </template> 
           <template v-else>
             <el-sub-menu :index="item.path">
               <template #title>
+                <el-icon>
+                  <component :is="item.meta.icon"></component>
+                </el-icon>
                 <span>{{ item.name}}</span>
               </template>
               <el-menu-item :index="item.path" v-for="(item,index) in item.children" :key="index" @click="routerGoto(item)">
-                {{ item.name }}
+                <template #title>
+                <el-icon>
+                  <component :is="item.meta.icon"></component>
+                </el-icon>
+                <span>{{ item.name}}</span>
+              </template>
               </el-menu-item>
             </el-sub-menu>
           </template>
@@ -48,7 +61,7 @@ import useTabsStore from '../store/TabsStore'
  export default {
     setup() {
         const router = useRouter();
-        let routerOptions = router.options.routes[1].children;
+        let routerOptions = ref(router.options.routes[1].children);
         let routerIndex = ref(router.currentRoute.value.path)
         watch(()=>router.currentRoute.value.path,(newVal)=>{
           routerIndex.value = newVal
@@ -59,6 +72,7 @@ import useTabsStore from '../store/TabsStore'
           tabsstore.addTabs(item.path,item.name)
           router.push(item.path);
         };
+        
         return{
           routerOptions,
           routerGoto,

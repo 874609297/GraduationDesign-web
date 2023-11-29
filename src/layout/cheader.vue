@@ -1,7 +1,15 @@
 <template>
     <div class="header-box">
-        <div class="header-left">
-            仪表盘
+        <div class="header-left1">
+            <el-breadcrumb separator=">">
+                <template v-for="(item, index) in breadList">
+                    <el-breadcrumb-item
+                        v-if="item.name"
+                        :key="index"
+                        >{{ item.name }}
+                    </el-breadcrumb-item>
+                </template>
+            </el-breadcrumb>
         </div>
         <div class="header-right">
             <span>
@@ -14,7 +22,6 @@
         v-model="tabsstore.$state.editableTabsValue"
         type="card"
         class="demo-tabs"
-        closable
         @tab-click="tabClick"
         >
     <el-tab-pane
@@ -31,8 +38,8 @@
 
 <script>
 import useTabsStore from '../store/TabsStore'
-import { useRouter } from 'vue-router';
-import { ref ,onMounted} from 'vue';
+import { useRouter ,useRoute } from 'vue-router';
+import { onMounted, ref ,watch} from 'vue';
 import {getUserInfo} from '../api/getUser'
 
 export default {
@@ -41,12 +48,23 @@ export default {
         let tabIndex = 2
         let tabsstore =useTabsStore()
         const router = useRouter()
+        const route = useRoute()
         let routerIndex = ref(router.currentRoute.value.path)
         const tabClick = (tab) => {
         let path = tab.paneName;
         router.push(path)
        }
-
+        //    面包屑
+        let breadList = ref([])
+        let getMatched=()=>{
+            breadList.value = route.matched.filter(item => item.name);
+        }
+       onMounted(()=>{
+        getMatched();
+       })
+       watch(() => route.path, (newValue, oldValue) => {
+            breadList.value = route.matched.filter(item => item.name);
+        })
        //获取头像用户名
        let imgSrc=ref('')
        let nickname = ref('')
@@ -54,20 +72,26 @@ export default {
            imgSrc.value = res.data[0].pic
            nickname.value = res.data[0].nickname
        })
-
+       
         return {
             tabIndex,
             tabsstore,
             tabClick,
             routerIndex,
             imgSrc,
-            nickname
+            nickname,
+            breadList
         }
     }
 }
 </script>
 
-<style>
+<style Scoped>
+.header-left1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .header-box{
     width: 100%;
     background-color: #fff;

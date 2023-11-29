@@ -7,7 +7,7 @@
       />
   <!-- 用户数据表格 -->
     <el-table :data="tableData" style="width: 100%">
-    <el-table-column fixed prop="isAdmin" label="是否为管理员" width="120" />
+    <el-table-column fixed prop="isAdmin" label="角色身份" width="120" />
     <el-table-column prop="pic" label="头像" width="220" >
       <template #default="scope">
                     <div style="display: flex; align-items: center">
@@ -84,8 +84,10 @@ export default {
         let tableData = ref([])
         onMounted(()=>{
           getUser().then((res)=>{
-            console.log(res.data);
             tableData.value = res.data
+            res.data.forEach((item)=>{
+              item.isAdmin = item.isAdmin ? '管理员' : '普通用户'
+            })
           })
         })
         //编辑用户信息
