@@ -13,6 +13,9 @@ import store from '../src/store/index'
 import VForm3 from 'vform3-builds'  //引入VForm3库
 import 'vform3-builds/dist/designer.style.css'  //引入VForm3样式
 
+//引入富文本编辑器
+
+
 const app = createApp(App)
 app.use(VForm3).use(router).use(ElementPlus,{
     locale: zhCn,

@@ -78,7 +78,6 @@
   import {getUser} from '../api/getUser'
   import {editUser,deleteUser} from '../api/changeUser'
   import { ElMessage } from 'element-plus'
-  import qs from 'qs'
 export default {
     setup(){
         let tableData = ref([])

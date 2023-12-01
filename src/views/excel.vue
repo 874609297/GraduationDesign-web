@@ -1,10 +1,10 @@
 <template>
-    <el-table :data="tableData" stripe style="width: 100%" id="tableid">
+    <el-table :data="tableData" stripe  style="width: 100%" id="tableid">
       <el-table-column prop="date" label="Date" width="180" />
       <el-table-column prop="name" label="Name" width="180" />
       <el-table-column prop="address" label="Address" />
     </el-table>
-    <el-button type="success" icon="el-icon-printer"  style="margin-left:10px" @click="exportToExcel()">导出</el-button>
+    <el-button type="success" icon="Upload"  style="margin-left:10px" @click="exportToExcel()">导出</el-button>
 
   </template>
   

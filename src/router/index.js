@@ -33,6 +33,12 @@ const routes = [
                         path:'/user',
                         name:'用户管理',
                         component:()=>import('../views/user.vue'),
+                    },
+                    {
+                        meta:{icon:"Menu"},
+                        path:'/menu',
+                        name:'菜单管理',
+                        component:()=>import('../views/menu.vue')
                     }
                 ]
             },
@@ -58,6 +64,12 @@ const routes = [
                         name:'excel导出',
                         component:()=>import('../views/excel.vue'),
                         meta:{icon:"Upload"}
+                    },
+                    {
+                        path:'/markdown',
+                        name:"富文本编辑器",
+                        meta:{icon:"Edit"},
+                        component:()=>import('../views/markdown.vue')
                     }
                 ]
             }
